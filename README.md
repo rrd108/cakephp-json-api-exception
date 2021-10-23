@@ -20,7 +20,7 @@ Then, to load the plugin either run the following command:
 bin/cake plugin load JsonApiException
 ```
 
-or manually add the following line to your app's `src/Application.php `file's `bootstrap()` function:
+or manually add the following line to your app's `src/Application.php` file's `bootstrap()` function:
 
 ```php
 $this->addPlugin('JsonApiException');
@@ -43,6 +43,7 @@ public function add()
         $user = $this->Users->patchEntity($user, $this->request->getData());
         if (!$this->Users->save($user)) {
             throw new JsonApiException($user, 'Save failed');
+            // throw new JsonApiException($user, 'Save failed', 418);   // you set the response's status code in the 3rd parameter
         }
     }
     $this->set(compact('user'));
