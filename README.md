@@ -7,5 +7,5 @@ You can install this plugin into your CakePHP application using [composer](https
 The recommended way to install composer packages is:
 
 ```
-composer require your-name-here/json-api-exception
+composer require rrd108/json-api-exception
 ```
