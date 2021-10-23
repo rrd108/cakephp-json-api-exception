@@ -9,3 +9,7 @@ The recommended way to install composer packages is:
 ```
 composer require rrd108/cakephp-json-api-exception
 ```
+
+```
+bin/cake plugin load JsonApiException
+```
