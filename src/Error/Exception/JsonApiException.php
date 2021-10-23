@@ -9,7 +9,7 @@ class JSonApiException extends BadRequestException
 {
     protected  $requestErrors;
 
-    public function __construct(EntityInterface $entity, $message = null, $code = 422)
+    public function __construct(EntityInterface $entity, $message = null, $code = 400)
     {
         $this->requestErrors = $entity->getErrors();
 
