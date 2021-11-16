@@ -5,7 +5,7 @@ namespace JsonApiException\Error\Exception;
 use Cake\Datasource\EntityInterface;
 use Cake\Http\Exception\BadRequestException;
 
-class JSonApiException extends BadRequestException
+class JsonApiException extends BadRequestException
 {
     protected  $requestErrors;
 
