@@ -20,6 +20,7 @@ class JsonApiExceptionRenderer extends ExceptionRenderer
         ];
 
         return $response
+            ->withAddedHeader('Access-Control-Allow-Origin', '*')
             ->withStringBody(json_encode($data))
             ->withStatus($error->getCode())
             ->withType('application/json');
