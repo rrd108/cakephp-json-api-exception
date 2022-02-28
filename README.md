@@ -43,7 +43,7 @@ public function add()
         $user = $this->Users->patchEntity($user, $this->request->getData());
         if (!$this->Users->save($user)) {
             throw new JsonApiException($user, 'Save failed');
-            // throw new JsonApiException($user, 'Save failed', 418);   // you set the response's status code in the 3rd parameter
+            // throw new JsonApiException($user, 'Save failed', 418);   // you can set the response's status code in the 3rd parameter
         }
     }
     $this->set(compact('user'));
@@ -55,14 +55,55 @@ If the save failed you will get a response like this.
 
 ```json
 {
-	"message": "Save failed",
-	"url": "/users.json",
-	"line": 12,
-	"errorCount": 1,
-	"errors": {
-		"password": {
-			"_required": "This field is required"
-		}
-	}
+  "message": "Save failed",
+  "url": "/users.json",
+  "line": 12,
+  "errorCount": 1,
+  "errors": {
+    "password": {
+      "_required": "This field is required"
+    }
+  }
+}
+```
+
+You can us it with an array of entities also.
+
+```php
+// for example in /src/Controller/UsersController.php slightly change the baked add function
+use JsonApiException\Error\Exception\JsonApiException;
+
+public function bulkAdd()
+{
+    $users = $this->Users->newEntities($this->request->getData());
+    if (!$this->Users->saveMany($users)) {
+        throw new JsonApiException($users, 'Errors in request data');
+    }
+    $this->set(compact('users'));
+    $this->viewBuilder()->setOption('serialize', ['users']);
+}
+```
+
+If the save failed you will get a response like this.
+As at this point we do not have an `id` for the entity, the error messages can not contain it. So an empty array will be present in the `errors` array if an entity does not have any errors. So the number of the entity will match the number of the error entries, entity #3's error message will be the third element of the error array.
+
+```json
+{
+  "message": "Errors in request data",
+  "url": "/users.json",
+  "line": 12,
+  "errorCount": 2,
+  "errors": [
+    {
+      "name": {
+        "_empty": "name is required"
+      }
+    },
+    {
+      "name": {
+        "_empty": "name is required"
+      }
+    }
+  ]
 }
 ```
