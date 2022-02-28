@@ -42,7 +42,8 @@ class JsonApiExceptionRendererTest extends TestCase
         $firstEntity->setError('name', ['_empty' => $this->validationError]);
         $secondEntity = new Entity();
         $secondEntity->setError('name', ['_empty' => $this->validationError]);
-        $entities = [$firstEntity, $secondEntity];
+        $thirdEntity = new Entity();
+        $entities = [$firstEntity, $secondEntity, $thirdEntity];
         $exception = new JsonApiException($entities, $this->message);
 
         $request = (new ServerRequest())

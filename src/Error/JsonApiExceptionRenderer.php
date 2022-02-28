@@ -10,13 +10,21 @@ class JsonApiExceptionRenderer extends ExceptionRenderer
 {
     public function jsonApi(JsonApiException $error)
     {
+        $errors = $error->getRequestErrors();
+        $errorsCount = 0;
+        foreach ($errors as $err) {
+            if (count($err)) {
+                $errorsCount++;
+            }
+        }
+
         $response = $this->controller->getResponse();
         $data = [
             'message' => $error->getMessage(),
             'url' =>  $this->controller->getRequest()->getRequestTarget(),
             'line' => $error->getLine(),
-            'errorCount' => count(Hash::flatten($error->getRequestErrors())),
-            'errors' => $error->getRequestErrors(),
+            'errorCount' => $errorsCount,
+            'errors' => $errors,
         ];
 
         return $response
