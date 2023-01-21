@@ -79,4 +79,19 @@ class JsonApiExceptionRendererTest extends TestCase
 
         $this->assertEquals(406, $response->getStatusCode());
     }
+
+    public function testJsonApiWithNull()
+    {
+        $message = 'Response on null';
+        $exception = new JsonApiException(null, $message);
+
+        $request = (new ServerRequest())
+            ->withParam('controller', 'Foo')
+            ->withParam('action', 'bar');
+        $exceptionRenderer = new JsonApiExceptionRenderer($exception, $request);
+
+        $response = $exceptionRenderer->render();
+        $responseBody = json_decode($response->__toString());
+        $this->assertEquals($message, $responseBody->message);
+    }
 }
