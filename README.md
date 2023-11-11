@@ -2,6 +2,8 @@
 
 Make your CakePHP 4 JSON REST API response more descriptive on errors.
 
+For CakePHP 5 use the [main branch](https://github.com/rrd108/cakephp-json-api-exception).
+
 If you want a simple solution for token authentication for a CakePHP JSON REST API, then check this: [CakePHP API Token Authenticator](https://github.com/rrd108/api-token-authenticator)
 
 ## Installation
