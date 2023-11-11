@@ -2,11 +2,10 @@
 
 namespace JsonApiException\Error;
 
-use Cake\Utility\Hash;
-use Cake\Error\ExceptionRenderer;
+use Cake\Error\Renderer\WebExceptionRenderer;
 use JsonApiException\Error\Exception\JsonApiException;
 
-class JsonApiExceptionRenderer extends ExceptionRenderer
+class JsonApiExceptionRenderer extends WebExceptionRenderer
 {
     public function jsonApi(JsonApiException $error)
     {
