@@ -4,26 +4,16 @@ declare(strict_types=1);
 
 namespace JsonApiException;
 
-use Cake\Core\Configure;
-use Cake\Core\BasePlugin;
-use Cake\Core\PluginApplicationInterface;
-
 /**
- * Plugin for JsonApiException
+ * Backwards-compatibility shim for CakePHP ≤5.2.
+ *
+ * CakePHP 5.3+ deprecates plugin classes named `Plugin` and expects
+ * the class to be named after the plugin (e.g. `JsonApiExceptionPlugin`).
+ * This class exists so that users on CakePHP ≤5.2 can still load
+ * the plugin as `$this->addPlugin('JsonApiException')` without changes.
+ *
+ * @deprecated Use JsonApiExceptionPlugin instead. Will be removed in next major release.
  */
-class Plugin extends BasePlugin
+class Plugin extends JsonApiExceptionPlugin
 {
-    /**
-     * Load all the plugin configuration and bootstrap logic.
-     *
-     * The host application is provided as an argument. This allows you to load
-     * additional plugin dependencies, or attach events.
-     *
-     * @param \Cake\Core\PluginApplicationInterface $app The host application
-     * @return void
-     */
-    public function bootstrap(PluginApplicationInterface $app): void
-    {
-        Configure::write('Error.exceptionRenderer', 'JsonApiException\Error\JsonApiExceptionRenderer');
-    }
 }
